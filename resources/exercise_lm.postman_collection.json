@@ -1,0 +1,90 @@
+{
+	"info": {
+		"_postman_id": "dd0496b1-2cc2-456f-b7ef-e9bb3644defb",
+		"name": "exercise_lm",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "test",
+			"item": [
+				{
+					"name": "localhost:8001/shopper/orders",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"shopper_id\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8001/shopper/orders",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"shopper",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8001/order/create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"purchase_date\": \"2020-11-25 10:01:43\",\n    \"delivery_date\": \"2020-11-26 11:15:25\",\n    \"interval_delivery\": \"10:00-13:00\",\n    \"amount\": 0,\n    \"completed\": false,\n    \"client_id_id\": 3,\n    \"address\": \"Test address\",\n    \"products\": {\n        \"product1\": {\n            \"shop_id\": 299,\n            \"name\": \"Product 000\",\n            \"description\": \"description 000\",\n            \"units\": 5,\n            \"price\": 23.45\n        },\n        \"product2\": {\n            \"shop_id\": 2,\n            \"name\": \"Product QWERTY\",\n            \"description\": \"description QWERTY\",\n            \"units\": 1,\n            \"price\": 3.45\n        },\n        \"product3\": {\n            \"shop_id\": 299,\n            \"name\": \"Product 77\",\n            \"description\": \"description 77\",\n            \"units\": 1,\n            \"price\": 1.23\n        },\n        \"product4\": {\n            \"shop_id\": 1,\n            \"name\": \"Product 876\",\n            \"description\": \"description 876\",\n            \"units\": 9,\n            \"price\": 7.87\n        },\n        \"product5\": {\n            \"shop_id\": 1,\n            \"name\": \"Product 231\",\n            \"description\": \"description 231\",\n            \"units\": 1,\n            \"price\": 0.45\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8001/order/create",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"order",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8001/client",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8001/client",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"client"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

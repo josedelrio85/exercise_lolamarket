@@ -1,0 +1,60 @@
+version: '3'
+
+services:
+    # web server layer, executes Dockerfile-nginx and maps config file into volume
+    nginx:
+        build:
+            context: .
+            dockerfile: Dockerfile-nginx
+        volumes:
+            - ./symfony/:/var/www/symfony/
+        ports:
+            - 8001:80
+        networks:
+            - symfony
+        depends_on:
+            - php
+
+    # application layer, executes Dockefile and set a volume to store files            
+    php:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        environment:
+            APP_ENV: dev
+        volumes:
+            - ./symfony/:/var/www/symfony/
+        networks:
+            - symfony
+        depends_on:
+            - mysql
+
+    # database layer, dump sql files inside /mysql folder
+    mysql:
+        image: mysql
+        command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci','--default-authentication-plugin=mysql_native_password']
+        ports:
+            - 3311:3306
+        volumes:
+            #- ./mysql:/var/lib/mysql
+            - ./mysql:/docker-entrypoint-initdb.d
+        environment:
+          MYSQL_ROOT_PASSWORD: root_bsc
+          MYSQL_DATABASE: exercise_lm
+          MYSQL_PASSWORD: root_bsc
+          MYSQL_USER: root_bsc
+        networks:
+            - symfony
+
+    # added composer layer to execute composer install inside volume
+    composer:
+        image: composer:1.9
+        command: ["composer", "install"]
+        working_dir: /var/www/symfony/
+        volumes:
+            - ./symfony/:/var/www/symfony/
+        depends_on:
+            - php
+
+networks:
+    symfony:
